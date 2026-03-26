@@ -32,8 +32,16 @@ const CatalogPage = () => {
         navigate(`/product/${product.handle}`);
     };
 
-    // Filter collections: Remove "Home page"
+    // Log for debugging
+    useEffect(() => {
+        if (collections.length > 0) {
+            console.log("Found collections:", collections.map(c => c.title));
+        }
+    }, [collections]);
+
+    // Filter collections: Remove "Home page" but keep it if it's the only one
     const filteredCollections = collections.filter(c => c.title?.toLowerCase().trim() !== "home page");
+    const displayCollections = filteredCollections.length > 0 ? filteredCollections : collections;
 
     const selectedCollection = collections.find(c => c.id === selectedCollectionId);
 
@@ -86,7 +94,7 @@ const CatalogPage = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {!selectedCollection ? (
                             // Collections View
-                            filteredCollections.map((collection) => (
+                            displayCollections.map((collection) => (
                                 <div
                                     key={collection.id}
                                     className="group cursor-pointer"
