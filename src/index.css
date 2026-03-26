@@ -1,0 +1,220 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Light mode app-level colors */
+    --app-bg: #f5f5f5;
+    --app-surface: #ffffff;
+    --app-text: #111111;
+    --app-text-muted: #555555;
+    --app-border: rgba(0, 0, 0, 0.08);
+    --app-nav-bg: rgba(245, 245, 245, 0.9);
+    --app-sidebar-bg: #ffffff;
+    --app-card-bg: rgba(0, 0, 0, 0.03);
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Dark mode app-level colors */
+    --app-bg: #0a0a0a;
+    --app-surface: #111111;
+    --app-text: #ffffff;
+    --app-text-muted: #9ca3af;
+    --app-border: rgba(255, 255, 255, 0.08);
+    --app-nav-bg: rgba(10, 10, 10, 0.9);
+    --app-sidebar-bg: #0f0f0f;
+    --app-card-bg: rgba(255, 255, 255, 0.03);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body {
+    background-color: var(--app-bg);
+    color: var(--app-text);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* =========================================
+   LIGHT MODE OVERRIDES
+   These override hardcoded dark Tailwind classes
+   when the .dark class is NOT on <html>
+   ========================================= */
+
+/* Page wrapper backgrounds */
+html:not(.dark) .bg-black,
+html:not(.dark) [class*="bg-\[#0a0a0a\]"],
+html:not(.dark) [class*="bg-\[#111\]"],
+html:not(.dark) [class*="bg-\[#0f0f0f\]"] {
+  background-color: var(--app-bg) !important;
+}
+
+/* Surface cards */
+html:not(.dark) [class*="bg-white\/\[0.03\]"],
+html:not(.dark) [class*="bg-white\/5"],
+html:not(.dark) [class*="bg-white\/10"] {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Primary text: white → near-black */
+html:not(.dark) .text-white {
+  color: #0d0d0d !important;
+}
+
+/* Muted text — made darker for legibility */
+html:not(.dark) .text-gray-400 {
+  color: #333333 !important;
+}
+
+html:not(.dark) .text-gray-500 {
+  color: #444444 !important;
+}
+
+/* Italic helper text (e.g. "Front design is fixed.") */
+html:not(.dark) .italic,
+html:not(.dark) [class*="text-gray"] {
+  color: #333333 !important;
+}
+
+/* Uppercase tracking labels like "DESIGN TOOLS", "ADD DESIGN" */
+html:not(.dark) [class*="tracking-wide"],
+html:not(.dark) [class*="uppercase"] {
+  color: #0d0d0d !important;
+}
+
+/* Borders */
+html:not(.dark) [class*="border-white\/5"],
+html:not(.dark) [class*="border-white\/10"],
+html:not(.dark) [class*="border-white\/20"] {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Hover backgrounds on nav/buttons */
+html:not(.dark) [class*="hover\:bg-white\/5"],
+html:not(.dark) [class*="hover\:bg-white\/10"] {
+  --tw-bg-opacity: 1;
+}
+
+html:not(.dark) .hover\:bg-white\/5:hover,
+html:not(.dark) .hover\:bg-white\/10:hover {
+  background-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Designer sidebar */
+html:not(.dark) [class*="bg-\[#1a1a1a\]"] {
+  background-color: #f0f0f0 !important;
+  color: #111111 !important;
+}
+
+/* Sheet (mobile drawer) */
+html:not(.dark) [class*="bg-\[#0a0a0a\]"] {
+  background-color: #ffffff !important;
+}
+
+/* Popover content */
+html:not(.dark) .bg-\[#1a1a1a\] {
+  background-color: #f9f9f9 !important;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: rgb(156, 163, 175);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+}
+
+html:not(.dark) .theme-toggle-btn {
+  color: #555555;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+html:not(.dark) .theme-toggle-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: #111111;
+}
+
+.theme-toggle-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle-btn:hover svg {
+  transform: rotate(15deg);
+}
