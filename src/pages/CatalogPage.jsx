@@ -54,9 +54,9 @@ const CatalogPage = () => {
     return (
         <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-orange-500 selection:text-white pb-20">
             <Navbar />
-            <div className="max-w-7xl mx-auto px-8 pt-16">
-                <div className="text-center space-y-4 mb-16">
-                    <h1 className="text-4xl md:text-5xl font-black tracking-tight self-center">
+            <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-10 sm:pt-16">
+                <div className="text-center space-y-3 sm:space-y-4 mb-10 sm:mb-16">
+                    <h1 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight self-center">
                         {selectedCollection ? (
                             <span className="text-orange-500 uppercase">{selectedCollection.title}</span>
                         ) : (
@@ -80,7 +80,7 @@ const CatalogPage = () => {
                 </div>
 
                 {isLoading ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
                         {[1, 2, 3].map((i) => (
                             <Card key={i} className="bg-white/[0.03] border-white/10 overflow-hidden border">
                                 <Skeleton className="h-[400px] w-full bg-white/5" />
@@ -91,7 +91,7 @@ const CatalogPage = () => {
                         ))}
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
                         {!selectedCollection ? (
                             // Collections View
                             displayCollections.map((collection) => (
@@ -101,7 +101,7 @@ const CatalogPage = () => {
                                     onClick={() => handleCollectionClick(collection.id)}
                                 >
                                     <Card className="bg-white/[0.03] border-white/10 overflow-hidden h-full border transition-all duration-300 hover:border-orange-500/50 hover:bg-white/[0.05]">
-                                        <div className="relative h-[400px] overflow-hidden bg-white/5">
+                                        <div className="relative h-[250px] sm:h-[400px] overflow-hidden bg-white/5">
                                             {(collection.image || collection.products?.[0]?.images?.[0]) && (
                                                 <img
                                                     src={collection.image?.src || collection.products[0].images[0].src}
@@ -132,7 +132,7 @@ const CatalogPage = () => {
                                         onClick={() => handleProductClick(product)}
                                     >
                                         <Card className="bg-white/[0.03] border-white/10 overflow-hidden h-full border transition-all duration-300 hover:border-orange-500/50 hover:bg-white/[0.05]">
-                                            <div className="relative h-[400px] overflow-hidden bg-white/5">
+                                            <div className="relative h-[250px] sm:h-[400px] overflow-hidden bg-white/5">
                                                 {product.images[0] && (
                                                     <img
                                                         src={product.images[0].src}

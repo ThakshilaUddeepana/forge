@@ -14,23 +14,23 @@ const MaterialsPage = () => {
 
             <main>
                 {/* Hero Section */}
-                <section className="relative pt-20 pb-24 overflow-hidden">
+                <section className="relative pt-12 sm:pt-20 pb-16 sm:pb-24 overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-transparent to-transparent opacity-50"></div>
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-                        <h1 className="text-5xl sm:text-7xl font-black uppercase tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-yellow-500">
+                        <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black uppercase tracking-tighter mb-4 sm:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-yellow-500">
                             Premium Materials
                         </h1>
-                        <p className="text-xl sm:text-2xl text-gray-400 max-w-3xl mx-auto font-medium">
+                        <p className="text-base sm:text-xl lg:text-2xl text-gray-400 max-w-3xl mx-auto font-medium">
                             We never compromise on quality. Discover the ultra-premium fabrics and pristine prints that make Forge gear legendary.
                         </p>
                     </div>
                 </section>
 
                 {/* 100% Cotton Section */}
-                <section className="py-20 border-t border-white/5 bg-[#0f0f0f]">
+                <section className="py-12 sm:py-20 border-t border-white/5 bg-[#0f0f0f]">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="flex flex-col lg:flex-row items-center gap-16">
+                        <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-16">
                             <div className="w-full lg:w-1/2">
                                 <div className="relative">
                                     <div className="absolute -inset-4 bg-orange-500/20 blur-3xl rounded-full opacity-50"></div>
@@ -46,10 +46,10 @@ const MaterialsPage = () => {
                                     <ShieldCheck size={18} />
                                     100% Organic Cotton
                                 </div>
-                                <h2 className="text-4xl sm:text-5xl font-black tracking-tighter uppercase leading-tight">
+                                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tighter uppercase leading-tight">
                                     Unmatched Comfort & Durability
                                 </h2>
-                                <p className="text-lg text-gray-400">
+                                <p className="text-base sm:text-lg text-gray-400">
                                     Feel the difference the moment you put it on. Our shirts are crafted from heavyweight, 100% organic cotton that provides incredible breathability, softness, and a structured drape that lasts.
                                 </p>
                                 <ul className="space-y-4 pt-4">
@@ -68,18 +68,18 @@ const MaterialsPage = () => {
                 </section>
 
                 {/* A2 Size Feature */}
-                <section className="py-20 border-t border-white/5">
+                <section className="py-12 sm:py-20 border-t border-white/5">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="flex flex-col-reverse lg:flex-row items-center gap-16">
+                        <div className="flex flex-col-reverse lg:flex-row items-center gap-8 sm:gap-16">
                             <div className="w-full lg:w-1/2 space-y-8">
                                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 font-bold uppercase tracking-wider text-sm">
                                     <PaintRoller size={18} />
                                     Massive Print Area
                                 </div>
-                                <h2 className="text-4xl sm:text-5xl font-black tracking-tighter uppercase leading-tight">
+                                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tighter uppercase leading-tight">
                                     Customizable A2 Size Backprint
                                 </h2>
-                                <p className="text-lg text-gray-400">
+                                <p className="text-base sm:text-lg text-gray-400">
                                     Don't limit your creativity. Our cutting-edge printing technology supports massive A2 dimensions (16.5 x 23.4 inches) on the back of every shirt, ensuring your designs are bold, vibrant, and impossible to ignore.
                                 </p>
                                 <div className="pt-6">
@@ -100,19 +100,19 @@ const MaterialsPage = () => {
                 </section>
 
                 {/* Gallery Grid */}
-                <section className="py-24 border-t border-white/5 bg-[#0f0f0f]">
+                <section className="py-14 sm:py-24 border-t border-white/5 bg-[#0f0f0f]">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="text-center mb-16">
-                            <h2 className="text-4xl font-black tracking-tighter uppercase mb-4">Fits & Styles</h2>
-                            <p className="text-gray-400 text-lg">Available in both Oversized and Regular fits.</p>
+                        <div className="text-center mb-10 sm:mb-16">
+                            <h2 className="text-2xl sm:text-4xl font-black tracking-tighter uppercase mb-4">Fits & Styles</h2>
+                            <p className="text-gray-400 text-base sm:text-lg">Available in both Oversized and Regular fits.</p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <img src="/materials/Oversized_t-shirts_with_202603201127.jpeg" alt="Oversized Fit" className="w-full h-80 object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-500" />
-                            <img src="/materials/White_cotton_t-shirts_202603201135.jpeg" alt="White Cotton" className="w-full h-80 object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-500" />
-                            <img src="/materials/Black_and_white_202603201118.jpeg" alt="Black and White Options" className="w-full h-80 object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-500" />
-                            <img src="/materials/FORGE_t_shirts_202603201120.jpeg" alt="FORGE Style" className="w-full h-80 object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-500 md:col-span-2 lg:col-span-1" />
-                            <img src="/materials/Folded_t_shirts_202603201111.jpeg" alt="Folded T-shirts" className="w-full h-80 object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-500 md:col-span-2" />
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                            <img src="/materials/Oversized_t-shirts_with_202603201127.jpeg" alt="Oversized Fit" className="w-full h-52 sm:h-80 object-cover rounded-xl sm:rounded-2xl hover:scale-[1.02] transition-transform duration-500" />
+                            <img src="/materials/White_cotton_t-shirts_202603201135.jpeg" alt="White Cotton" className="w-full h-52 sm:h-80 object-cover rounded-xl sm:rounded-2xl hover:scale-[1.02] transition-transform duration-500" />
+                            <img src="/materials/Black_and_white_202603201118.jpeg" alt="Black and White Options" className="w-full h-52 sm:h-80 object-cover rounded-xl sm:rounded-2xl hover:scale-[1.02] transition-transform duration-500" />
+                            <img src="/materials/FORGE_t_shirts_202603201120.jpeg" alt="FORGE Style" className="w-full h-52 sm:h-80 object-cover rounded-xl sm:rounded-2xl hover:scale-[1.02] transition-transform duration-500 sm:col-span-2 lg:col-span-1" />
+                            <img src="/materials/Folded_t_shirts_202603201111.jpeg" alt="Folded T-shirts" className="w-full h-52 sm:h-80 object-cover rounded-xl sm:rounded-2xl hover:scale-[1.02] transition-transform duration-500 sm:col-span-2" />
                         </div>
                     </div>
                 </section>

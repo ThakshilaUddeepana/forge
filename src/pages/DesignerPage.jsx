@@ -72,12 +72,12 @@ function DesignerPage() {
             <div className="flex flex-1 overflow-hidden">
                 <ToolsSidebar manualSync={manualSync} onDownload={handleDownload} />
                 <div className="flex-1 overflow-y-auto">
-                    <main className="p-4 sm:p-8">
-                        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 sm:gap-12 items-start justify-center">
+                    <main className="p-3 sm:p-8">
+                        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-5 sm:gap-12 items-start justify-center">
                             {/* Left: 3D Model Section */}
-                            <div className="flex-1 w-full space-y-6">
+                            <div className="flex-1 w-full space-y-3 sm:space-y-6">
                                 {/* 3D Model */}
-                                <div className="aspect-video sm:aspect-square w-full relative rounded-2xl sm:rounded-3xl bg-white/[0.02] border border-white/5 shadow-2xl overflow-hidden backdrop-blur-sm">
+                                <div className="aspect-[4/3] sm:aspect-square w-full relative rounded-2xl sm:rounded-3xl bg-white/[0.02] border border-white/5 shadow-2xl overflow-hidden backdrop-blur-sm">
                                     <Canvas shadows camera={{ position: [0, 0, 18], fov: 15 }}>
                                         <OrbitControls
                                             enabled={false}
@@ -107,9 +107,9 @@ function DesignerPage() {
                                 </div>
 
                                 {/* View Toggles */}
-                                <div className="flex justify-center gap-4">
+                                <div className="flex justify-center gap-2 sm:gap-4">
                                     <button
-                                        className={`flex-1 py-4 rounded-2xl font-bold transition-all duration-300 ${selectedView === "front"
+                                        className={`flex-1 py-3 sm:py-4 rounded-xl sm:rounded-2xl text-sm sm:text-base font-bold transition-all duration-300 ${selectedView === "front"
                                             ? "bg-orange-600 text-white shadow-lg shadow-orange-600/20 active:scale-95"
                                             : "bg-white/5 text-gray-400 hover:bg-white/10 border border-white/10"
                                             }`}
@@ -118,7 +118,7 @@ function DesignerPage() {
                                         Front View
                                     </button>
                                     <button
-                                        className={`flex-1 py-4 rounded-2xl font-bold transition-all duration-300 ${selectedView === "back"
+                                        className={`flex-1 py-3 sm:py-4 rounded-xl sm:rounded-2xl text-sm sm:text-base font-bold transition-all duration-300 ${selectedView === "back"
                                             ? "bg-orange-600 text-white shadow-lg shadow-orange-600/20 active:scale-95"
                                             : "bg-white/5 text-gray-400 hover:bg-white/10 border border-white/10"
                                             }`}
@@ -129,7 +129,7 @@ function DesignerPage() {
                                 </div>
 
                                 {/* Color Selection — framed section under toggles */}
-                                <div className="space-y-3 bg-white/[0.03] border border-white/10 rounded-2xl p-5">
+                                <div className="space-y-3 bg-white/[0.03] border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-5">
                                     <label className="text-xs font-bold uppercase tracking-wider text-gray-400">Select T-Shirt Color</label>
                                     <div className="flex gap-4 items-center">
                                         <button

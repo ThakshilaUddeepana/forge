@@ -69,30 +69,30 @@ const TShirtSelectionPage = () => {
                 <Navbar />
             </div>
 
-            <div className="max-w-5xl mx-auto px-6 py-20">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
                 {/* Header */}
-                <div className="text-center space-y-4 mb-16">
-                    <p className="text-orange-500 text-sm font-semibold uppercase tracking-widest">Step 1 of 1</p>
-                    <h1 className="text-5xl md:text-6xl font-black tracking-tighter">
+                <div className="text-center space-y-3 sm:space-y-4 mb-10 sm:mb-16">
+                    <p className="text-orange-500 text-xs sm:text-sm font-semibold uppercase tracking-widest">Step 1 of 1</p>
+                    <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tighter">
                         CHOOSE YOUR
                         <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
                             STYLE
                         </span>
                     </h1>
-                    <p className="text-gray-400 text-lg max-w-md mx-auto">
+                    <p className="text-gray-400 text-sm sm:text-lg max-w-md mx-auto">
                         Select the t-shirt style you want to customize. You can change colors, add graphics and text in the next step.
                     </p>
                     <div className="h-1 w-20 bg-orange-500 mx-auto rounded-full" />
                 </div>
 
                 {/* Cards */}
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
                     {options.map((opt) => (
                         <button
                             key={opt.type}
                             onClick={() => handleSelect(opt.type)}
-                            className="group relative flex flex-col items-center gap-6 p-8 rounded-3xl bg-white/[0.03] border border-white/8 hover:border-orange-500/50 hover:bg-white/[0.06] transition-all duration-400 text-left cursor-pointer focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            className="group relative flex flex-col items-center gap-4 sm:gap-6 p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-white/[0.03] border border-white/8 hover:border-orange-500/50 hover:bg-white/[0.06] transition-all duration-400 text-left cursor-pointer focus:outline-none focus:ring-2 focus:ring-orange-500"
                         >
                             {/* Badge */}
                             <span className={`absolute top-5 right-5 ${opt.badgeColor} text-white text-xs font-bold px-3 py-1 rounded-full`}>
@@ -100,7 +100,7 @@ const TShirtSelectionPage = () => {
                             </span>
 
                             {/* T-Shirt Preview */}
-                            <div className="w-48 h-48 text-white/20 group-hover:text-orange-500/40 transition-colors duration-400">
+                            <div className="w-32 h-32 sm:w-48 sm:h-48 text-white/20 group-hover:text-orange-500/40 transition-colors duration-400">
                                 {opt.preview}
                             </div>
 

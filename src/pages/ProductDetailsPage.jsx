@@ -80,7 +80,7 @@ const ProductDetailsPage = () => {
         <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-orange-500 selection:text-white pb-20">
             <Navbar />
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-16">
                 {/* Breadcrumbs */}
                 <div className="flex items-center space-x-2 text-sm text-gray-400 mb-8 overflow-x-auto whitespace-nowrap scrollbar-hide">
                     <button onClick={() => navigate("/")} className="hover:text-white transition-colors">Home</button>
@@ -90,9 +90,9 @@ const ProductDetailsPage = () => {
                     <span className="text-orange-500 font-medium truncate">{selectedProduct.title}</span>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 xl:gap-20">
                     {/* Left Side: Product Images */}
-                    <div className="space-y-6">
+                    <div className="space-y-4 sm:space-y-6">
                         <div className="relative group">
                             <Card className="bg-white/[0.03] border-white/10 overflow-hidden border-2 aspect-square relative flex items-center justify-center">
                                 {selectedProduct.images.length > 0 ? (
@@ -134,12 +134,12 @@ const ProductDetailsPage = () => {
                     <div className="flex flex-col">
                         <div className="flex-1 space-y-8">
                             <div>
-                                <h1 className="text-4xl lg:text-5xl font-black tracking-tight mb-2 uppercase italic">
+                                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight mb-2 uppercase italic">
                                     {selectedProduct.title.split(' ').map((word, i) => (
                                         <span key={i} className={i % 2 !== 0 ? "text-orange-500" : ""}>{word} </span>
                                     ))}
                                 </h1>
-                                <p className="text-2xl font-bold text-gray-300">
+                                <p className="text-lg sm:text-2xl font-bold text-gray-300">
                                     {price ? `${price.amount} ${price.currencyCode}` : "Price unavailable"}
                                 </p>
                             </div>
@@ -172,7 +172,7 @@ const ProductDetailsPage = () => {
                                 <div className="grid grid-cols-1 gap-4">
                                     <Button
                                         onClick={handleAddToCart}
-                                        className="h-16 bg-orange-600 text-white hover:bg-orange-500 font-black text-xl uppercase tracking-wider rounded-xl transition-all active:scale-95 shadow-lg shadow-orange-500/20 flex items-center justify-center space-x-3 w-full"
+                                        className="h-14 sm:h-16 bg-orange-600 text-white hover:bg-orange-500 font-black text-base sm:text-xl uppercase tracking-wider rounded-xl transition-all active:scale-95 shadow-lg shadow-orange-500/20 flex items-center justify-center space-x-3 w-full"
                                     >
                                         <ShoppingCart className="w-6 h-6" />
                                         <span>Add to Cart</span>
