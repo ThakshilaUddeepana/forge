@@ -225,9 +225,10 @@ const DesignArea = forwardRef((props, ref) => {
   }, []);
 
   const getScaleFactor = () => {
-    if (windowWidth >= 550) return 1;
-    const availableWidth = windowWidth - 32;
-    return Math.min(1, availableWidth / 480);
+    if (windowWidth >= 768) return 1;
+    const availableWidth = windowWidth - 24; // Less padding for more space
+    const baseWidth = 480;
+    return Math.min(1, availableWidth / baseWidth);
   };
 
   const scaleFactor = getScaleFactor();
@@ -252,76 +253,97 @@ const DesignArea = forwardRef((props, ref) => {
   return (
     <div className="flex flex-col items-center w-full gap-6">
 
-      {/* Mobile-only Design Tools — always visible above canvas */}
-      <div className="lg:hidden w-full px-4">
-        <div className="flex items-center gap-2 bg-white/[0.03] border border-white/10 rounded-2xl p-3">
-          <input
-            type="file"
-            accept="image/*"
-            ref={mobileFileInputRef}
-            onChange={handleMobileAddImage}
-            className="hidden"
-          />
-          <Button
-            onClick={() => mobileFileInputRef.current?.click()}
-            className="flex-1 bg-orange-600 hover:bg-orange-500 text-white rounded-xl py-3 flex flex-col items-center gap-1 h-auto text-[10px] font-bold uppercase tracking-wider"
-          >
-            <ImagePlus size={16} />
-            Add Design
-          </Button>
-          <Button
-            onClick={() => {
-              if (!activeCanvas) return;
-              const obj = activeCanvas.getActiveObject();
-              if (obj) {
-                obj.set('flipX', !obj.flipX);
-                activeCanvas.requestRenderAll();
-                activeCanvas.fire('object:modified', { target: obj });
-              }
-            }}
-            variant="outline"
-            className="flex-1 bg-white/5 border-white/10 hover:bg-white/10 text-white rounded-xl py-3 flex flex-col items-center gap-1 h-auto text-[10px] font-bold uppercase tracking-wider"
-          >
-            <FlipHorizontal size={16} />
-            Mirror
-          </Button>
-          <Button
-            onClick={() => {
-              if (!activeCanvas) return;
-              const obj = activeCanvas.getActiveObject();
-              if (obj) {
-                activeCanvas.remove(obj);
+      {/* Mobile-only Design Tools — horizontally scrollable to prevent cropping */}
+      <div className="lg:hidden w-full">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 px-4 scrollbar-hide">
+          <div className="flex items-center gap-2 bg-white/[0.03] border border-white/10 rounded-2xl p-2 shrink-0">
+            <input
+              type="file"
+              accept="image/*"
+              ref={mobileFileInputRef}
+              onChange={handleMobileAddImage}
+              className="hidden"
+            />
+            <Button
+              onClick={() => mobileFileInputRef.current?.click()}
+              className="bg-orange-600 hover:bg-orange-500 text-white rounded-xl py-3 px-4 flex flex-col items-center gap-1 h-auto text-[10px] font-bold uppercase tracking-wider shrink-0"
+            >
+              <ImagePlus size={16} />
+              Add Design
+            </Button>
+            <Button
+              onClick={() => {
+                // Trigger download logic from parent if passed via props, or we can handle here.
+                // For now, we'll use a placeholder or handle it via a new prop if needed.
+                // DesignerPage passes it to ToolsSidebar, we should pass it to DesignArea too.
+                if (props.onDownload) props.onDownload();
+              }}
+              variant="outline"
+              className="bg-white/5 border-white/10 hover:bg-white/10 text-white rounded-xl py-3 px-4 flex flex-col items-center gap-1 h-auto text-[10px] font-bold uppercase tracking-wider shrink-0"
+            >
+              <ImagePlus size={16} className="rotate-180" />
+              Download
+            </Button>
+            <Button
+              onClick={() => {
+                if (!activeCanvas) return;
+                const obj = activeCanvas.getActiveObject();
+                if (obj) {
+                  obj.set('flipX', !obj.flipX);
+                  activeCanvas.requestRenderAll();
+                  activeCanvas.fire('object:modified', { target: obj });
+                }
+              }}
+              variant="outline"
+              className="bg-white/5 border-white/10 hover:bg-white/10 text-white rounded-xl py-3 px-4 flex flex-col items-center gap-1 h-auto text-[10px] font-bold uppercase tracking-wider shrink-0"
+            >
+              <FlipHorizontal size={16} />
+              Mirror
+            </Button>
+            <Button
+              onClick={() => {
+                if (!activeCanvas) return;
+                const obj = activeCanvas.getActiveObject();
+                if (obj) {
+                  activeCanvas.remove(obj);
+                  activeCanvas.discardActiveObject();
+                  activeCanvas.renderAll();
+                }
+              }}
+              variant="outline"
+              className="bg-white/5 border-white/10 hover:bg-white/10 text-white rounded-xl py-3 px-4 flex flex-col items-center gap-1 h-auto text-[10px] font-bold uppercase tracking-wider shrink-0"
+            >
+              <Trash size={16} />
+              Remove
+            </Button>
+            <Button
+              onClick={() => {
+                if (!activeCanvas) return;
+                activeCanvas.getObjects().forEach((obj) => {
+                  if (obj.id !== 'print-area') {
+                    activeCanvas.remove(obj);
+                  }
+                });
                 activeCanvas.discardActiveObject();
                 activeCanvas.renderAll();
-              }
-            }}
-            variant="outline"
-            className="flex-1 bg-white/5 border-white/10 hover:bg-white/10 text-white rounded-xl py-3 flex flex-col items-center gap-1 h-auto text-[10px] font-bold uppercase tracking-wider"
-          >
-            <Trash size={16} />
-            Remove
-          </Button>
-          <Button
-            onClick={() => {
-              if (!activeCanvas) return;
-              activeCanvas.clear();
-            }}
-            variant="outline"
-            className="flex-1 bg-white/5 border-white/10 hover:bg-white/10 text-white rounded-xl py-3 flex flex-col items-center gap-1 h-auto text-[10px] font-bold uppercase tracking-wider"
-          >
-            <Trash size={16} />
-            Clear
-          </Button>
+              }}
+              variant="outline"
+              className="bg-white/5 border-white/10 hover:bg-white/10 text-white rounded-xl py-3 px-4 flex flex-col items-center gap-1 h-auto text-[10px] font-bold uppercase tracking-wider shrink-0"
+            >
+              <Trash size={16} />
+              Clear
+            </Button>
+          </div>
         </div>
       </div>
 
       <div
         className="flex justify-center w-full relative transition-all duration-300 ease-in-out px-4"
         style={{
-          height: windowWidth < 550 ? `${(canvasHeight + 40) * scaleFactor}px` : 'auto',
-          transform: windowWidth < 550 ? `scale(${scaleFactor})` : 'none',
+          height: windowWidth < 768 ? `${(canvasHeight + 40) * scaleFactor}px` : 'auto',
+          transform: windowWidth < 768 ? `scale(${scaleFactor})` : 'none',
           transformOrigin: 'top center',
-          marginBottom: windowWidth < 550 ? `-${(canvasHeight + 40) * (1 - scaleFactor)}px` : '0'
+          marginBottom: windowWidth < 768 ? `-${(canvasHeight + 40) * (1 - scaleFactor)}px` : '0'
         }}
       >
         <Card className={`bg-white/[0.03] border-white/10 shadow-2xl backdrop-blur-xl rounded-[1.5rem] sm:rounded-[2.5rem] w-fit mx-auto overflow-hidden ${selectedView === 'front' ? 'block' : 'hidden'}`}>
@@ -342,10 +364,10 @@ const DesignArea = forwardRef((props, ref) => {
         <Dialog>
           <DialogTrigger asChild>
             <Button
-              className="w-full bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-white font-black uppercase tracking-wider rounded-xl py-5 shadow-lg shadow-orange-600/30 transition-all active:scale-95 flex items-center justify-center gap-2 text-sm"
+              className="w-full bg-white/5 border border-white/10 hover:bg-white/10 text-white font-bold uppercase tracking-wider rounded-xl py-4 transition-all active:scale-95 flex items-center justify-center gap-2 text-xs"
             >
-              <Ruler className="w-5 h-5" />
-              Size Chart
+              <Ruler size={16} />
+              View Size Chart
             </Button>
           </DialogTrigger>
           <DialogContent className="bg-[#111] border-white/10 text-white max-w-2xl p-4 sm:p-6">
@@ -409,7 +431,7 @@ const DesignArea = forwardRef((props, ref) => {
           ) : uploadError ? '⟳ Retry' : isLoading ? 'Processing...' : 'Buy Now'}
         </Button>
       </div>
-    </div>
+    </div >
   );
 });
 

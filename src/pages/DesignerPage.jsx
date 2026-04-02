@@ -72,12 +72,12 @@ function DesignerPage() {
             <div className="flex flex-1 overflow-hidden">
                 <ToolsSidebar manualSync={manualSync} onDownload={handleDownload} />
                 <div className="flex-1 overflow-y-auto">
-                    <main className="p-3 sm:p-8">
+                    <main className="p-2 sm:p-8">
                         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-5 sm:gap-12 items-start justify-center">
                             {/* Left: 3D Model Section */}
-                            <div className="flex-1 w-full space-y-3 sm:space-y-6">
+                            <div className="flex-1 w-full space-y-4 sm:space-y-6">
                                 {/* 3D Model */}
-                                <div className="aspect-[4/3] sm:aspect-square w-full relative rounded-2xl sm:rounded-3xl bg-white/[0.02] border border-white/5 shadow-2xl overflow-hidden backdrop-blur-sm">
+                                <div className="aspect-square sm:aspect-square w-full relative rounded-2xl sm:rounded-3xl bg-white/[0.02] border border-white/5 shadow-2xl overflow-hidden backdrop-blur-sm">
                                     <Canvas shadows camera={{ position: [0, 0, 18], fov: 15 }}>
                                         <OrbitControls
                                             enabled={false}

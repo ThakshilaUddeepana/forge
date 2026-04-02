@@ -17,7 +17,7 @@ export function ToolsSidebar({ manualSync, onDownload }) {
         <Button
           variant="outline"
           size="icon"
-          className="lg:hidden fixed top-[72px] left-3 h-10 w-10 z-50 bg-orange-600 border-none shadow-xl shadow-orange-600/30 text-white hover:bg-orange-500 rounded-xl active:scale-95 transition-all"
+          className="lg:hidden fixed bottom-24 left-3 h-11 w-11 z-40 bg-orange-600 border-none shadow-xl shadow-orange-600/30 text-white rounded-xl active:scale-95 transition-all"
         >
           <Menu className="h-7 w-7" />
         </Button>
