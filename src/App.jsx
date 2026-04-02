@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Analytics } from '@vercel/analytics/react';
 import HomePage from './pages/HomePage';
 import DesignerPage from './pages/DesignerPage';
 import TShirtSelectionPage from './pages/TShirtSelectionPage';
@@ -38,6 +39,7 @@ function App() {
       <CartDrawer />
       <WhatsAppButton />
       <Toaster />
+      <Analytics />
     </BrowserRouter>
   );
 }
