@@ -53,8 +53,10 @@ export default defineConfig({
   },
   // Optimize dependency pre-bundling
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', 'react-redux', '@reduxjs/toolkit'],
-    // Exclude heavy deps from pre-bundling to speed up dev starts
-    exclude: ['@react-three/drei'],
+    include: [
+      'react', 'react-dom', 'react-router-dom', 'react-redux', '@reduxjs/toolkit',
+      'three', '@react-three/fiber', '@react-three/drei',
+      'stats.js',
+    ],
   },
 });
