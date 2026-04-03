@@ -7,10 +7,18 @@ import { setSelectedView, setTshirtColor } from "../features/tshirtSlice";
 import { useCanvas } from "../hooks/useCanvas";
 import { TshirtModel } from "../components/TShirtModel";
 import { useCanvasTextureSync } from "../hooks/useCanvasTextureSync";
-import { Suspense, useRef } from "react";
+import { Suspense, useRef, useCallback, useMemo } from "react";
 import { ToolsSidebar } from "../components/ToolsSidebar";
 import { DownloadHandler } from "../components/DownloadButton";
 import Navbar from "../components/Navbar";
+
+// 3D Loading fallback shown inside the Canvas Suspense boundary
+const CanvasLoader = () => (
+    <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0a0a0a]/80 backdrop-blur-sm z-10">
+        <div className="w-12 h-12 border-3 border-orange-500/30 border-t-orange-500 rounded-full animate-spin mb-4" />
+        <p className="text-gray-400 text-sm font-medium tracking-wider uppercase">Loading 3D Model...</p>
+    </div>
+);
 
 function DesignerPage() {
     const tshirtColor = useSelector((state) => state.tshirt.tshirtColor);
@@ -33,11 +41,11 @@ function DesignerPage() {
         manualTriggerSync(selectedView);
     };
 
-    const handleViewChange = (view) => {
+    const handleViewChange = useCallback((view) => {
         if (view !== selectedView) {
             dispatch(setSelectedView(view));
         }
-    };
+    }, [selectedView, dispatch]);
 
     const handleDownload = async () => {
         if (!captureCanvasRef.current) return;
@@ -78,32 +86,44 @@ function DesignerPage() {
                             <div className="flex-1 w-full space-y-4 sm:space-y-6">
                                 {/* 3D Model */}
                                 <div className="aspect-square sm:aspect-square w-full relative rounded-2xl sm:rounded-3xl bg-white/[0.02] border border-white/5 shadow-2xl overflow-hidden backdrop-blur-sm">
-                                    <Canvas shadows camera={{ position: [0, 0, 18], fov: 15 }}>
-                                        <OrbitControls
-                                            enabled={false}
-                                            maxPolarAngle={Math.PI / 2}
-                                            minPolarAngle={Math.PI / 3}
-                                        />
-                                        <Suspense fallback={null}>
-                                            <ambientLight intensity={0.7} />
-                                            <directionalLight position={[10, 10, 5]} intensity={1.2} castShadow />
-                                            <directionalLight position={[-10, 5, 5]} intensity={0.5} />
-                                            <TshirtModel
-                                                tshirtColor={tshirtColor}
-                                                selectedType={selectedType}
-                                                selectedView={selectedView}
-                                                onViewChange={handleViewChange}
-                                                designTexture={designTextureFront}
-                                                designTextureBack={designTextureBack}
+                                    <Suspense fallback={<CanvasLoader />}>
+                                        <Canvas
+                                            shadows
+                                            camera={{ position: [0, 0, 18], fov: 15 }}
+                                            dpr={[1, 1.5]}
+                                            performance={{ min: 0.5 }}
+                                            gl={{
+                                                antialias: true,
+                                                powerPreference: 'high-performance',
+                                                failIfMajorPerformanceCaveat: false,
+                                            }}
+                                        >
+                                            <OrbitControls
+                                                enabled={false}
+                                                maxPolarAngle={Math.PI / 2}
+                                                minPolarAngle={Math.PI / 3}
                                             />
-                                            <Environment preset="city" />
-                                            <DownloadHandler
-                                                onDownloadReady={(captureFunc) => {
-                                                    captureCanvasRef.current = captureFunc;
-                                                }}
-                                            />
-                                        </Suspense>
-                                    </Canvas>
+                                            <Suspense fallback={null}>
+                                                <ambientLight intensity={0.7} />
+                                                <directionalLight position={[10, 10, 5]} intensity={1.2} castShadow />
+                                                <directionalLight position={[-10, 5, 5]} intensity={0.5} />
+                                                <TshirtModel
+                                                    tshirtColor={tshirtColor}
+                                                    selectedType={selectedType}
+                                                    selectedView={selectedView}
+                                                    onViewChange={handleViewChange}
+                                                    designTexture={designTextureFront}
+                                                    designTextureBack={designTextureBack}
+                                                />
+                                                <Environment preset="city" />
+                                                <DownloadHandler
+                                                    onDownloadReady={(captureFunc) => {
+                                                        captureCanvasRef.current = captureFunc;
+                                                    }}
+                                                />
+                                            </Suspense>
+                                        </Canvas>
+                                    </Suspense>
                                 </div>
 
                                 {/* View Toggles */}

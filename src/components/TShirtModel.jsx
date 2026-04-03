@@ -306,15 +306,17 @@ export function TshirtModel({
     return map;
   }, [allMeshes, tshirtColor, isOversized, frontMeshName, logoTexture, isDarkShirt]);
 
-  // Smooth rotation
+  // Smooth rotation — only interpolate when needed
   useFrame(() => {
-    if (groupRef.current) {
-      const targetRotation = selectedView === "back" ? Math.PI : 0;
-      const diff = targetRotation - groupRef.current.rotation.y;
-      if (Math.abs(diff) > 0.001) {
-        groupRef.current.rotation.y += diff * 0.1;
-      }
+    if (!groupRef.current) return;
+    const targetRotation = selectedView === "back" ? Math.PI : 0;
+    const diff = targetRotation - groupRef.current.rotation.y;
+    if (Math.abs(diff) < 0.001) {
+      // Snap to exact target and stop
+      groupRef.current.rotation.y = targetRotation;
+      return;
     }
+    groupRef.current.rotation.y += diff * 0.1;
   });
 
   const handleClick = (view) => { onViewChange(view); };
