@@ -1,6 +1,7 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import CartDrawer from './components/CartDrawer';
 import WhatsAppButton from './components/WhatsAppButton';
 import { Toaster } from "@/components/ui/toaster";
@@ -51,6 +52,7 @@ function App() {
       <CartDrawer />
       <WhatsAppButton />
       <Toaster />
+      <SpeedInsights />
     </BrowserRouter>
   );
 }
